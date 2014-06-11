@@ -1,0 +1,5 @@
+C:\Users\Vinicius\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\Lambda3\Work Item Field History VS2013\1.0\\WorkItemFieldHistory.dll
+C:\Users\Vinicius\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\Lambda3\Work Item Field History VS2013\1.0\\WorkItemFieldHistory.pkgdef
+C:\Users\Vinicius\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\Lambda3\Work Item Field History VS2013\1.0\\extension.vsixmanifest
+C:\Users\Vinicius\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\Lambda3\Work Item Field History VS2013\1.0\Resources\\Package.ico
+C:\Users\Vinicius\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\Lambda3\Work Item Field History VS2013\1.0\\WorkItemFieldHistory.pdb
