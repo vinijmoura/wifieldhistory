@@ -10,7 +10,6 @@
     {
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
-        private IServiceProvider serviceProvider { get; set; }
         public bool IsEnabled
         {
             get { return true; }
@@ -48,15 +47,6 @@
 
         public void Dispose()
         {
-        }
-
-        public T GetService<T>()
-        {
-            if (this.serviceProvider != null)
-            {
-                return (T)this.serviceProvider.GetService(typeof(T));
-            }
-            return default(T);
         }
     }
 }
