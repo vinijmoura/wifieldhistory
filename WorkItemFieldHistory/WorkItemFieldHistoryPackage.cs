@@ -17,7 +17,7 @@ namespace Lambda3.WorkItemFieldHistory
     [Guid(GuidList.guidWorkItemFieldHistoryPkgString)]
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-    [ProvideToolWindow(typeof(WorkItemFieldHistoryToolWindow), Transient = true, Style = VsDockStyle.Tabbed, Orientation = ToolWindowOrientation.Bottom)]
+    [ProvideToolWindow(typeof(BaseWindow), Transient = true, Style = VsDockStyle.Tabbed, Orientation = ToolWindowOrientation.Bottom)]
     public sealed class WorkItemFieldHistoryPackage : Package
     {
         private const string EXTENSION_CLASS = "Microsoft.VisualStudio.TeamFoundation.TeamFoundationServerExt";
@@ -53,12 +53,12 @@ namespace Lambda3.WorkItemFieldHistory
             try
             {
                 var extension = GetTeamFoundationServerExt();
-                var window = FindToolWindow(typeof(WorkItemFieldHistoryToolWindow), 0, true);
+                var window = FindToolWindow(typeof(BaseWindow), 0, true);
 
                 if ((null == window) || (null == window.Frame))
                     throw new NotSupportedException(Resources.CanNotCreateWindow);
 
-                var wnd = window as WorkItemFieldHistoryToolWindow;
+                var wnd = window as BaseWindow;
                 wnd.InitializeExtension(extension);
                 IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
 

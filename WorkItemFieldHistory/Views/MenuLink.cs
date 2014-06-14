@@ -1,14 +1,16 @@
-﻿namespace Lambda3.WorkItemFieldHistory
-{
-    using System;
-    using System.Windows.Forms;
-    using EnvDTE;
-    using Microsoft.TeamFoundation.Controls;
+﻿using System;
+using System.Windows.Forms;
+using EnvDTE;
+using Microsoft.TeamFoundation.Controls;
+using System.ComponentModel;
+using Microsoft.VisualStudio.Shell;
 
+namespace Lambda3.WorkItemFieldHistory
+{
     [TeamExplorerNavigationLink(GuidList.WorkItemFieldHistoryNavigationLink, TeamExplorerNavigationItemIds.WorkItems, 0)]
-    public class WorkItemFieldHistoryNavigationLink : ITeamExplorerNavigationLink
+    public class MenuLink : ITeamExplorerNavigationLink
     {
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsEnabled
         {
@@ -29,11 +31,9 @@
         {
             try
             {
-                EnvDTE80.DTE2 dte2 = Microsoft.VisualStudio.Shell.Package.GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
+                var dte2 = Package.GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
                 if (dte2 != null)
-                {
                     dte2.ExecuteCommand("Tools.WorkItemFieldHistory");
-                }
             }
             catch (Exception ex)
             {

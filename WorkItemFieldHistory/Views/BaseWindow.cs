@@ -10,11 +10,11 @@ using Lambda3.WorkItemFieldHistory.ViewModels;
 namespace Lambda3.WorkItemFieldHistory
 {
     [Guid("72A23C2B-974A-49AB-B6ED-660CC9BE45E3")]
-    public class WorkItemFieldHistoryToolWindow : ToolWindowPane
+    public class BaseWindow : ToolWindowPane
     {
         private VSExtensionContext extensionContext;
 
-        public WorkItemFieldHistoryToolWindow()
+        public BaseWindow()
             : base(null)
         {
             Caption = Resources.ToolWindowTitle;

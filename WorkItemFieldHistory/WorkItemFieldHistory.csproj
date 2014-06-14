@@ -147,10 +147,10 @@
     <Compile Include="Views\FieldHistory.xaml.cs">
       <DependentUpon>FieldHistory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WorkItemFieldHistoryNavigationLink.cs" />
+    <Compile Include="Views\MenuLink.cs" />
     <Compile Include="WorkItemFieldHistoryPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorkItemFieldHistoryToolWindow.cs" />
+    <Compile Include="Views\BaseWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
