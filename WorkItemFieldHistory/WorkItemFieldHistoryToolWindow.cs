@@ -5,6 +5,9 @@
     using Microsoft.TeamFoundation.Client;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.TeamFoundation;
+    using Lambda3.WorkItemFieldHistory.Views;
+    using System.Windows;
+    using Lambda3.WorkItemFieldHistory.ViewModels;
 
     /// <summary>
     /// This class implements the tool window exposed by this package and hosts a user control.
@@ -38,7 +41,7 @@
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on 
             // the object returned by the Content property.
-            this.Content = new MainView();
+            this.Content = new FieldHistory();
         }
 
         public void InitializeExtension(TeamFoundationServerExt ext)
@@ -60,9 +63,8 @@
                 var collection = new TfsTeamProjectCollection(TfsTeamProjectCollection.GetFullyQualifiedUriForName(this.ctx.ActiveConnection), new TfsClientCredentials());
                 collection.EnsureAuthenticated();
 
-                var view = this.Content as MainView;
-                view.InitializeContext(this.ctx);
-                view.InitializeRepository(new TfsClientRepository(collection));
+                
+                (Content as FrameworkElement).DataContext = new FieldHistoryViewModel(new TfsClientRepository(collection));
             }
         }
 

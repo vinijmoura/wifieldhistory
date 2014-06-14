@@ -136,9 +136,6 @@
   <ItemGroup>
     <Compile Include="Guids.cs" />
     <Compile Include="ITfsContext.cs" />
-    <Compile Include="MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PkgCmdID.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -148,6 +145,10 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RevisionFieldChanged.cs" />
     <Compile Include="TfsClientRepository.cs" />
+    <Compile Include="ViewModels\FieldHistoryViewModel.cs" />
+    <Compile Include="Views\FieldHistory.xaml.cs">
+      <DependentUpon>FieldHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkItemFieldHistoryNavigationLink.cs" />
     <Compile Include="WorkItemFieldHistoryPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -185,9 +186,9 @@
     <None Include="Resources\WorkItemFieldHistory.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\FieldHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <PropertyGroup>

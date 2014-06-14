@@ -52,8 +52,11 @@
                 }
             }
         }
-
-
+        
+        public WorkItem GetWorkItem(int id)
+        {
+            return workItemStore.GetWorkItem(id);
+        }
     }
 
 
