@@ -1,8 +1,6 @@
-﻿// Guids.cs
-// MUST match guids.h
-using System;
+﻿using System;
 
-namespace Lambda3.WorkItemFieldHistory
+namespace Lambda3.WorkItemFieldHistory.Package
 {
     static class GuidList
     {

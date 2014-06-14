@@ -1,13 +1,11 @@
-﻿using Microsoft.TeamFoundation.MVVM;
+﻿using Lambda3.WorkItemFieldHistory.Models;
+using Microsoft.TeamFoundation.MVVM;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Lambda3.WorkItemFieldHistory.ViewModels

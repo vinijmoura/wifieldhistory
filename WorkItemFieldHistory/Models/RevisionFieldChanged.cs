@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lambda3.WorkItemFieldHistory
+﻿namespace Lambda3.WorkItemFieldHistory.Models
 {
     public class RevisionFieldChanged
     {

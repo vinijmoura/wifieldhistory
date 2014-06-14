@@ -1,11 +1,12 @@
-﻿using System;
-using System.Windows.Forms;
-using EnvDTE;
+﻿using EnvDTE;
+using Lambda3.WorkItemFieldHistory.Package;
 using Microsoft.TeamFoundation.Controls;
+using VS = Microsoft.VisualStudio.Shell;
+using System;
 using System.ComponentModel;
-using Microsoft.VisualStudio.Shell;
+using System.Windows.Forms;
 
-namespace Lambda3.WorkItemFieldHistory
+namespace Lambda3.WorkItemFieldHistory.Views
 {
     [TeamExplorerNavigationLink(GuidList.WorkItemFieldHistoryNavigationLink, TeamExplorerNavigationItemIds.WorkItems, 0)]
     public class MenuLink : ITeamExplorerNavigationLink
@@ -31,7 +32,7 @@ namespace Lambda3.WorkItemFieldHistory
         {
             try
             {
-                var dte2 = Package.GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
+                var dte2 = VS.Package.GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
                 if (dte2 != null)
                     dte2.ExecuteCommand("Tools.WorkItemFieldHistory");
             }

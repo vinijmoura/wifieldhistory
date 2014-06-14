@@ -1,13 +1,14 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using Lambda3.WorkItemFieldHistory.Models;
+using Lambda3.WorkItemFieldHistory.Package;
+using Lambda3.WorkItemFieldHistory.ViewModels;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TeamFoundation;
-using Lambda3.WorkItemFieldHistory.Views;
+using System;
+using System.Runtime.InteropServices;
 using System.Windows;
-using Lambda3.WorkItemFieldHistory.ViewModels;
 
-namespace Lambda3.WorkItemFieldHistory
+namespace Lambda3.WorkItemFieldHistory.Views
 {
     [Guid("72A23C2B-974A-49AB-B6ED-660CC9BE45E3")]
     public class BaseWindow : ToolWindowPane
