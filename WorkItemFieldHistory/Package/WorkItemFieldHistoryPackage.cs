@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 namespace Lambda3.WorkItemFieldHistory.Package
 {
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(GuidList.guidWorkItemFieldHistoryPkgString)]
+    [Guid(GuidList.PACKAGE)]
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     [ProvideToolWindow(typeof(BaseWindow), Transient = true, Style = VsDockStyle.Tabbed, Orientation = ToolWindowOrientation.Bottom)]
@@ -30,10 +30,10 @@ namespace Lambda3.WorkItemFieldHistory.Package
                 var commandService = GetService(typeof(IMenuCommandService)) as IMenuCommandService;
                 if (commandService is OleMenuCommandService)
                 {
-                    var menuCommandID = new CommandID(GuidList.guidWorkItemFieldHistoryCmdSet, TEST_COMMAND_ID);
+                    var menuCommandID = new CommandID(new Guid(GuidList.COMMAND_SET), TEST_COMMAND_ID);
                     commandService.AddCommand(new MenuCommand((s, e) => ShowToolWindow(), menuCommandID));
 
-                    var toolwndCommandID = new CommandID(GuidList.guidWorkItemFieldHistoryCmdSet, TEST_TOOL_ID);
+                    var toolwndCommandID = new CommandID(new Guid(GuidList.COMMAND_SET), TEST_TOOL_ID);
                     commandService.AddCommand(new MenuCommand((s, e) => ShowToolWindow(), toolwndCommandID));
                 }
             }

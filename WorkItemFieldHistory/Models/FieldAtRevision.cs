@@ -1,8 +1,8 @@
 ﻿namespace Lambda3.WorkItemFieldHistory.Models
 {
-    public class RevisionFieldChanged
+    public class FieldAtRevision
     {
-        public string RevisionNumber { get; set; }
+        public int RevisionNumber { get; set; }
 
         public string RevisedBy { get; set; }
 

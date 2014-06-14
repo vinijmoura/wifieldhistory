@@ -1,8 +1,8 @@
-﻿using Lambda3.WorkItemFieldHistory.Models;
+﻿using Lambda3.WorkItemFieldHistory.Extensions;
+using Lambda3.WorkItemFieldHistory.Models;
 using Microsoft.TeamFoundation.MVVM;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,12 +12,13 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
 {
     class FieldHistoryViewModel : INotifyPropertyChanged
     {
-        private TfsClientRepository clientRepository;
+        private readonly TfsClientRepository clientRepository;
 
         private int workItemId;
         private Field selectedField;
-        private WorkItem workItem;
-        private ObservableCollection<RevisionFieldChanged> fieldRevisions;
+        private RevisionHistory revisionHistory;
+        private BindingList<FieldAtRevision> fieldChangesHistory;
+
 
         public int WorkItemId
         {
@@ -31,51 +32,52 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             set { selectedField = value; OnPropertyChanged(); ChangeField(); }
         }
 
-        public WorkItem WorkItem
+        public RevisionHistory RevisionHistory
         {
-            get { return workItem; }
-            set { workItem = value; OnPropertyChanged(); }
+            get { return revisionHistory; }
+            set { revisionHistory = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<RevisionFieldChanged> FieldRevisions
+        public BindingList<FieldAtRevision> FieldChangesHistory
         {
-            get { return fieldRevisions; }
-            set { fieldRevisions = value; OnPropertyChanged(); }
+            get { return fieldChangesHistory; }
+            set { fieldChangesHistory = value; OnPropertyChanged(); }
         }
 
-        public ICommand ViewFieldsCommand { get; set; }
+
+        public ICommand ViewFieldsCommand { get; private set; }
+
 
         public FieldHistoryViewModel(TfsClientRepository tfsRepository)
         {
-            ViewFieldsCommand = new RelayCommand(ViewFieldsCommand_Execute);
+            ViewFieldsCommand = new RelayCommand((p) => ViewFieldsOfWorkItem(),
+                                                 (p) => WorkItemId > 0);
 
             this.clientRepository = tfsRepository;
         }
 
-        public void ChangeField()
+
+        private void ChangeField()
         {
             if (SelectedField == null)
                 return;
 
-             var revisions = WorkItem.Revisions
-                 .Cast<Revision>()
-                 .Where(revision => revision.Fields[SelectedField.Name].IsChangedInRevision)
-                 .Select(revision => new RevisionFieldChanged
-                    {
-                        RevisionNumber = (revision.Index + 1).ToString(),
-                        RevisedBy = revision.Fields["Changed By"].Value.ToString(),
-                        RevisionDate = revision.Fields["Changed Date"].Value.ToString(),
-                        NewValue = revision.Fields[SelectedField.Name].Value.ToString(),
-                        OldValue = (revision.Fields[SelectedField.Name].OriginalValue ?? String.Empty).ToString()
-                    });
+            FieldChangesHistory = new BindingList<FieldAtRevision>(RevisionHistory.GetFieldHistory(SelectedField).ToList());
+        }
 
-             FieldRevisions = new ObservableCollection<RevisionFieldChanged>(revisions);
-        }
-        
-        public void ViewFieldsCommand_Execute()
+        private void ViewFieldsOfWorkItem()
         {
-            WorkItem = clientRepository.GetWorkItem(WorkItemId);
+            try
+            {
+                RevisionHistory = new RevisionHistory(clientRepository.GetWorkItem(WorkItemId));
+                SelectedField = RevisionHistory.Fields.FirstOrDefault();
+            }
+            catch (Exception error)
+            {
+                error.Show("Work Item Field Manager");
+            }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

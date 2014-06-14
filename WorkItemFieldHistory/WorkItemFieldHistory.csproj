@@ -136,17 +136,20 @@
   <ItemGroup>
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\PackageExtensions.cs" />
+    <Compile Include="Extensions\RevisionExtensions.cs" />
+    <Compile Include="Models\RevisionHistory.cs" />
     <Compile Include="Package\Guids.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\RevisionFieldChanged.cs" />
+    <Compile Include="Models\FieldAtRevision.cs" />
     <Compile Include="Models\TfsClientRepository.cs" />
     <Compile Include="ViewModels\FieldHistoryViewModel.cs" />
-    <Compile Include="Views\FieldHistory.xaml.cs">
-      <DependentUpon>FieldHistory.xaml</DependentUpon>
+    <Compile Include="ViewModels\ValidationRules\IntergerValidator.cs" />
+    <Compile Include="Views\FieldHistoryView.xaml.cs">
+      <DependentUpon>FieldHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuLink.cs" />
     <Compile Include="Package\WorkItemFieldHistoryPackage.cs" />
@@ -185,7 +188,7 @@
     <None Include="Resources\WorkItemFieldHistory.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\FieldHistory.xaml">
+    <Page Include="Views\FieldHistoryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

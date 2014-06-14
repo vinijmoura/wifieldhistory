@@ -78,8 +78,6 @@ C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\bin\D
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\bin\Debug\Microsoft.WITDataStore.dll
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\WorkItemFieldHistory.csprojResolveAssemblyReference.cache
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\WorkItemFieldHistory.csproj.ResolveComReference.cache
-C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\Views\FieldHistory.baml
-C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\Views\FieldHistory.g.cs
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\WorkItemFieldHistory_MarkupCompile.cache
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\WorkItemFieldHistory.g.resources
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\VSPackage.resources
@@ -95,3 +93,7 @@ C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\D
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\WorkItemFieldHistory.pkgdef
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\WorkItemFieldHistory.latest.pkgdef
 C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\extension.vsixmanifest
+C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\Views\FieldHistoryView.baml
+C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\Views\FieldHistoryView.g.cs
+C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\fholiveira\Source\Repos\WorkItemFieldHistory\WorkItemFieldHistory\obj\Debug\WorkItemFieldHistory_MarkupCompile.lref

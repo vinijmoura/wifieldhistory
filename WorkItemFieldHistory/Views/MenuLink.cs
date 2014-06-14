@@ -1,4 +1,5 @@
 ﻿using EnvDTE;
+using Lambda3.WorkItemFieldHistory.Extensions;
 using Lambda3.WorkItemFieldHistory.Package;
 using Microsoft.TeamFoundation.Controls;
 using VS = Microsoft.VisualStudio.Shell;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Lambda3.WorkItemFieldHistory.Views
 {
-    [TeamExplorerNavigationLink(GuidList.WorkItemFieldHistoryNavigationLink, TeamExplorerNavigationItemIds.WorkItems, 0)]
+    [TeamExplorerNavigationLink(GuidList.MENU_ITEM, TeamExplorerNavigationItemIds.WorkItems, 0)]
     public class MenuLink : ITeamExplorerNavigationLink
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,9 +37,9 @@ namespace Lambda3.WorkItemFieldHistory.Views
                 if (dte2 != null)
                     dte2.ExecuteCommand("Tools.WorkItemFieldHistory");
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                MessageBox.Show(ex.ToString());
+                error.Show("Work Item Field Manager");
             }
         }
 

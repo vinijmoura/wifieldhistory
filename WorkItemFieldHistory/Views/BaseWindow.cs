@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace Lambda3.WorkItemFieldHistory.Views
 {
-    [Guid("72A23C2B-974A-49AB-B6ED-660CC9BE45E3")]
+    [Guid(GuidList.WINDOW)]
     public class BaseWindow : ToolWindowPane
     {
         private VSExtensionContext extensionContext;
@@ -21,7 +21,7 @@ namespace Lambda3.WorkItemFieldHistory.Views
             Caption = Resources.ToolWindowTitle;
             BitmapResourceID = 301;
             BitmapIndex = 1;
-            Content = new FieldHistory();
+            Content = new FieldHistoryView();
         }
 
         public void InitializeExtension(TeamFoundationServerExt ext)
