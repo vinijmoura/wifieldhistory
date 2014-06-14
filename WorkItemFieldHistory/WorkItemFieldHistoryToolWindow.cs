@@ -19,7 +19,7 @@
     [Guid("72A23C2B-974A-49AB-B6ED-660CC9BE45E3")]
     public class WorkItemFieldHistoryToolWindow : ToolWindowPane
     {
-        private ITfsContext ctx;
+        private VSExtensionContext ctx;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WorkItemFieldHistoryToolManagerToolWindow"/> class.

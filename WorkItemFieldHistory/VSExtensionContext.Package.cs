@@ -4,7 +4,7 @@
     using Microsoft.VisualStudio.TeamFoundation;
 
 
-    public class VSExtensionContext : ITfsContext
+    public class VSExtensionContext
     {
         private readonly TeamFoundationServerExt ext;
         private string currentConnectionUri;
