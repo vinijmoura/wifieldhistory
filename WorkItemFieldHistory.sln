@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkItemFieldHistory", "WorkItemFieldHistory\WorkItemFieldHistory.csproj", "{8EC94B08-AC04-4440-8ACA-7E372C29B4A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkItemFieldHistory.WebAccess", "WorkItemFieldHistory.WebAccess\WorkItemFieldHistory.WebAccess.csproj", "{E03739B6-E3C6-4CF3-98BC-DCD02472B94C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8EC94B08-AC04-4440-8ACA-7E372C29B4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EC94B08-AC04-4440-8ACA-7E372C29B4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EC94B08-AC04-4440-8ACA-7E372C29B4A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E03739B6-E3C6-4CF3-98BC-DCD02472B94C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03739B6-E3C6-4CF3-98BC-DCD02472B94C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03739B6-E3C6-4CF3-98BC-DCD02472B94C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03739B6-E3C6-4CF3-98BC-DCD02472B94C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
