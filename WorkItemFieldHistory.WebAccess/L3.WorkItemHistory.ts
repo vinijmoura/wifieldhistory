@@ -1,7 +1,7 @@
 ﻿
 TFS.module("L3.WorkItemHistory",
     [
-        "L3.WorkItemHistory.Controls",
+        "./L3.WorkItemHistory.Controls",
         "TFS.WorkItemTracking.Controls",
     ],
     function () {
