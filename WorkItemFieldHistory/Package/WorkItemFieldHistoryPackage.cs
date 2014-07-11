@@ -39,7 +39,7 @@ namespace Lambda3.WorkItemFieldHistory.Package
             }
             catch (Exception error)
             {
-                error.Show("Work Item Field Manager");
+                error.Show("Work Item Field History");
             }
         }
 
@@ -57,7 +57,7 @@ namespace Lambda3.WorkItemFieldHistory.Package
             }
             catch (Exception error)
             {
-                error.Show("Work Item Field Manager");
+                error.Show("Work Item Field History");
             }
         }
 

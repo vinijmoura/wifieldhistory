@@ -53,7 +53,17 @@
             </Button.Style>
         </Button>
 
-        <GroupBox Header="{Binding Path=RevisionHistory.WorkItem.Title}" Grid.Row="1" Grid.ColumnSpan="3" Margin="10">          
+        <GroupBox Grid.Row="1" Grid.ColumnSpan="3" Margin="10">
+            <GroupBox.Header>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} - {1}">
+                            <Binding Path="RevisionHistory.WorkItem.Type.Name"/>
+                            <Binding Path="RevisionHistory.WorkItem.Title"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </GroupBox.Header>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
