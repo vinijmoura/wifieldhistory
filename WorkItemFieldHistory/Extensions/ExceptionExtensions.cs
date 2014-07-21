@@ -12,7 +12,7 @@ namespace Lambda3.WorkItemFieldHistory.Extensions
                             MessageBoxButton.OK,
                             MessageBoxImage.Error,
                             MessageBoxResult.OK,
-                            MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+                            MessageBoxOptions.DefaultDesktopOnly | MessageBoxOptions.DefaultDesktopOnly);
         }
     }
 }
