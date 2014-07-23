@@ -89,7 +89,7 @@
                           Focusable="False"
                           Grid.Row="1"
                           Margin="5"
-                          AlternatingRowBackground="LightGray"
+                          AlternatingRowBackground="Aqua"
                           AlternationCount="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Rev"   Width=".2*" Binding="{Binding RevisionNumber}"/>
