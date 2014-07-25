@@ -64,25 +64,8 @@
                     </TextBlock.Text>
                 </TextBlock>
             </GroupBox.Header>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Field Names" Margin="10" VerticalAlignment="Center"/>
-                <ComboBox ItemsSource="{Binding RevisionHistory.Fields}"
-                          SelectedItem="{Binding SelectedField}"
-                          DisplayMemberPath="Name"
-                          SelectedIndex="0"
-                          Grid.Column="1"
-                          Margin="5,10"
-                          TabIndex="6"/>
 
-                <DataGrid ItemsSource="{Binding FieldChangesHistory}"
+            <DataGrid ItemsSource="{Binding FieldChangesHistory}"
                           AutoGenerateColumns="False"
                           Grid.ColumnSpan="2"
                           IsReadOnly="True"
@@ -91,6 +74,40 @@
                           Margin="5"
                           AlternatingRowBackground="#BDBDBD"
                           AlternationCount="2">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Path=Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                <Expander>
+                                                    <Expander.Header>
+                                                    <TextBlock>
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}{0} - {1} Revision(s)">
+                                                                <Binding Path="Name"/>
+                                                                <Binding Path="ItemCount"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </Expander.Header>
+                                                    <ItemsPresenter />
+                                                </Expander>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Rev"   Width=".2*" Binding="{Binding RevisionNumber}"/>
                         <DataGridTextColumn Header="Revised By" Width="*" Binding="{Binding RevisedBy}"/>
@@ -99,7 +116,7 @@
                         <DataGridTextColumn Header="Old Value" Width="*" Binding="{Binding OldValue}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-            </Grid>
+
         </GroupBox>
     </Grid>
 </UserControl>

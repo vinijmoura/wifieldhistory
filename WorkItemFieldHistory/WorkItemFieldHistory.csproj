@@ -147,6 +147,7 @@
     <Compile Include="Models\FieldAtRevision.cs" />
     <Compile Include="Models\TfsClientRepository.cs" />
     <Compile Include="ViewModels\FieldHistoryViewModel.cs" />
+    <Compile Include="ViewModels\ICollectionView.cs" />
     <Compile Include="ViewModels\ValidationRules\IntergerValidator.cs" />
     <Compile Include="Views\FieldHistoryView.xaml.cs">
       <DependentUpon>FieldHistoryView.xaml</DependentUpon>

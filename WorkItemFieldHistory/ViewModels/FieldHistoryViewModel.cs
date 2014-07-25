@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Lambda3.WorkItemFieldHistory.ViewModels
@@ -15,9 +16,8 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
         private readonly TfsClientRepository clientRepository;
 
         private int workItemId;
-        private Field selectedField;
         private RevisionHistory revisionHistory;
-        private BindingList<FieldAtRevision> fieldChangesHistory;
+        private ICollectionView fieldChangesHistory;
 
 
         public int WorkItemId
@@ -26,19 +26,13 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             set { workItemId = value; OnPropertyChanged(); }
         }
 
-        public Field SelectedField
-        {
-            get { return selectedField; }
-            set { selectedField = value; OnPropertyChanged(); ChangeField(); }
-        }
-
         public RevisionHistory RevisionHistory
         {
             get { return revisionHistory; }
             set { revisionHistory = value; OnPropertyChanged(); }
         }
 
-        public BindingList<FieldAtRevision> FieldChangesHistory
+        public ICollectionView FieldChangesHistory
         {
             get { return fieldChangesHistory; }
             set { fieldChangesHistory = value; OnPropertyChanged(); }
@@ -56,21 +50,13 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             this.clientRepository = tfsRepository;
         }
 
-
-        private void ChangeField()
-        {
-            if (SelectedField == null)
-                return;
-
-            FieldChangesHistory = new BindingList<FieldAtRevision>(RevisionHistory.GetFieldHistory(SelectedField).ToList());
-        }
-
         private void ViewFieldsOfWorkItem()
         {
             try
             {
                 RevisionHistory = new RevisionHistory(clientRepository.GetWorkItem(WorkItemId));
-                SelectedField = RevisionHistory.Fields.FirstOrDefault();
+                FieldChangesHistory = new ListCollectionView(RevisionHistory.GetAllFieldHistory().ToList());
+                FieldChangesHistory.GroupDescriptions.Add(new PropertyGroupDescription("FieldName"));
             }
             catch (Exception error)
             {
