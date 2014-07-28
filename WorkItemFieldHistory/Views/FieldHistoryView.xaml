@@ -88,7 +88,7 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type GroupItem}">
-                                            <Expander IsExpanded="True" Background="#FF112255" BorderBrush="#FF002255" Foreground="#FFEEEEEE" BorderThickness="1,1,1,5">
+                                            <Expander IsExpanded="True" Background="RoyalBlue" BorderBrush="LightSteelBlue" Foreground="#FFEEEEEE" BorderThickness="1,1,1,5">
                                                     <Expander.Header>
                                                     <TextBlock>
                                                         <TextBlock.Text>
