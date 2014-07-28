@@ -39,7 +39,8 @@ namespace Lambda3.WorkItemFieldHistory.Models
                       NewValue = revision.GetFieldValue(field.Name),
                       OldValue = revision.GetFieldOriginalValue(field.Name),
                       FieldName = field.Name
-                  });
+                  })
+                  .OrderByDescending(revision => revision.RevisionDate);
         }
         public IEnumerable<FieldAtRevision> GetAllFieldHistory()
         {
