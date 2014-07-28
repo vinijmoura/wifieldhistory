@@ -2,6 +2,8 @@
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Globalization;
 
 namespace Lambda3.WorkItemFieldHistory.Models
 {
@@ -38,9 +40,9 @@ namespace Lambda3.WorkItemFieldHistory.Models
                       RevisionDate = revision.GetFieldValue("Changed Date"),
                       NewValue = revision.GetFieldValue(field.Name),
                       OldValue = revision.GetFieldOriginalValue(field.Name),
-                      FieldName = field.Name
+                      FieldName = field.Name,
                   })
-                  .OrderByDescending(revision => revision.RevisionDate);
+                  .OrderByDescending(revision => Convert.ToDateTime(revision.RevisionDate));
         }
         public IEnumerable<FieldAtRevision> GetAllFieldHistory()
         {
