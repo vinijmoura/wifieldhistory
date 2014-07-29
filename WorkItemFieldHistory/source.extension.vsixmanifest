@@ -5,7 +5,7 @@
     <DisplayName>Work Item Field History VS2013</DisplayName>
     <Description>This package audits a specific field of a work item, showing only the revisions in which its value has changed.</Description>
     <MoreInfo>http://visualstudiogallery.msdn.microsoft.com/68f29da6-36ef-4084-9973-1fbf6116db48</MoreInfo>
-    <Icon>Resources\Package.ico</Icon>
+    <Icon>Package.ico</Icon>
     <PreviewImage>Resources\Package.ico</PreviewImage>
     <Tags>TFS 2013, WorkItem</Tags>
   </Metadata>
