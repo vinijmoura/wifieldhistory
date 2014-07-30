@@ -1,4 +1,5 @@
-﻿using Lambda3.WorkItemFieldHistory.Extensions;
+﻿using EnvDTE;
+using Lambda3.WorkItemFieldHistory.Extensions;
 using Lambda3.WorkItemFieldHistory.Views;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
@@ -53,7 +54,7 @@ namespace Lambda3.WorkItemFieldHistory.Package
                     throw new NotSupportedException(Resources.CanNotCreateWindow);
 
                 window.InitializeExtension(GetExtension());
-                ErrorHandler.ThrowOnFailure((window.Frame as IVsWindowFrame).Show());
+                ErrorHandler.ThrowOnFailure(((IVsWindowFrame) window.Frame).Show());
             }
             catch (Exception error)
             {
@@ -63,8 +64,10 @@ namespace Lambda3.WorkItemFieldHistory.Package
 
         private TeamFoundationServerExt GetExtension()
         {
-            var dte = GetGlobalService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
-            return dte.GetObject(EXTENSION_CLASS) as TeamFoundationServerExt;
+            DTE = (DTE) GetGlobalService(typeof(DTE));
+            return DTE.GetObject(EXTENSION_CLASS) as TeamFoundationServerExt;
         }
+
+        internal static DTE DTE { get; private set; }
     }
 }

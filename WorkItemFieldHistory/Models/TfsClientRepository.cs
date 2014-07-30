@@ -8,11 +8,13 @@ namespace Lambda3.WorkItemFieldHistory.Models
     public class TfsClientRepository : IDisposable
     {
         private readonly TfsTeamProjectCollection collection;
+        private readonly string selectedProject;
         private readonly WorkItemStore workItemStore;
 
-        public TfsClientRepository(TfsTeamProjectCollection collection)
+        public TfsClientRepository(TfsTeamProjectCollection collection, string selectedProject)
         {
             this.collection = collection;
+            this.selectedProject = selectedProject;
             this.workItemStore = collection.GetService<WorkItemStore>();
         }
 
@@ -24,6 +26,16 @@ namespace Lambda3.WorkItemFieldHistory.Models
         public WorkItem GetWorkItem(int id)
         {
             return workItemStore.GetWorkItem(id);
+        }
+
+        public WorkItemStore WorkItemStore
+        {
+            get { return workItemStore; }
+        }
+
+        public string SelectedProject
+        {
+            get { return selectedProject; }
         }
 
         public void Dispose()

@@ -39,7 +39,7 @@ namespace Lambda3.WorkItemFieldHistory.Views
                 var collection = new TfsTeamProjectCollection(uri, new TfsClientCredentials());
                 collection.EnsureAuthenticated();
 
-                (Content as FrameworkElement).DataContext = new FieldHistoryViewModel(new TfsClientRepository(collection));
+                (Content as FrameworkElement).DataContext = new FieldHistoryViewModel(new TfsClientRepository(collection, extensionContext.SelectedProject));
             }
         }
     }
