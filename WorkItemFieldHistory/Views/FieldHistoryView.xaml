@@ -6,19 +6,26 @@
              xmlns:rules="clr-namespace:Lambda3.WorkItemFieldHistory.ViewModels.ValidationRules"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/FieldsChangesDataGrid.xaml"/>
+            </ResourceDictionary.MergedDictionaries> 
+        </ResourceDictionary>
+    </UserControl.Resources> 
+    
     <Grid Margin="5,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto" MinWidth="78"/>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="594*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <TextBlock Text="Work Item ID:" Margin="10, 5"/>
         <TextBox x:Name="WorkItemId"
                  HorizontalAlignment="Left" 
@@ -35,7 +42,11 @@
             </TextBox.Text>
         </TextBox>
 
-        <Button Grid.Column="2" Content="..." Command="{Binding PickWorkItemCommand}" />
+        <Button Content="..."
+                Command="{Binding PickWorkItemCommand}"
+                Grid.Column="2"
+                Margin="5,0"
+                Width="40"/>
 
         <Button Content="Show Revision(s)"
                 Command="{Binding ViewFieldsCommand}"
@@ -67,65 +78,28 @@
                     </TextBlock.Text>
                 </TextBlock>
             </GroupBox.Header>
-
-            <DataGrid ItemsSource="{Binding FieldChangesHistory}"
+            <Grid>
+                <DataGrid ItemsSource="{Binding FieldChangesHistory}"
                           AutoGenerateColumns="False"
                           Grid.ColumnSpan="2"
                           IsReadOnly="True"
                           Focusable="False"
                           Grid.Row="1"
-                          Margin="5"
-                          >
-                <DataGrid.GroupStyle>
-                    <GroupStyle>
-                        <GroupStyle.HeaderTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Path=Name}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GroupStyle.HeaderTemplate>
-                        <GroupStyle.ContainerStyle>
-                            <Style TargetType="{x:Type GroupItem}">
-                                <Setter Property="Margin" Value="0,0,0,5"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type GroupItem}">
-                                            <Expander IsExpanded="True" Background="RoyalBlue" BorderBrush="LightSteelBlue" Foreground="#FFEEEEEE" BorderThickness="1,1,1,5">
-                                                <Expander.Header>
-                                                    <TextBlock>
-                                                        <TextBlock.Text>
-                                                            <MultiBinding StringFormat="{}{0} - {1} Revision(s)">
-                                                                <Binding Path="Name"/>
-                                                                <Binding Path="ItemCount"/>
-                                                            </MultiBinding>
-                                                        </TextBlock.Text>
-                                                    </TextBlock>
-                                                </Expander.Header>
-                                                <ItemsPresenter />
-                                            </Expander>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </GroupStyle.ContainerStyle>
-                    </GroupStyle>
-                </DataGrid.GroupStyle>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Foreground" Value="Black" />
-                        <Setter Property="Background" Value="White" />
-                    </Style>
-                </DataGrid.RowStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Rev"   Width=".2*" Binding="{Binding RevisionNumber}"/>
-                    <DataGridTextColumn Header="Revised By" Width="*" Binding="{Binding RevisedBy}"/>
-                    <DataGridTextColumn Header="Revision Date" Width="*" Binding="{Binding RevisionDate}"/>
-                    <DataGridTextColumn Header="New Value" Width="*" Binding="{Binding NewValue}"/>
-                    <DataGridTextColumn Header="Old Value" Width="*" Binding="{Binding OldValue}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
+                          Margin="5">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource DataGridFieldGroup}" 
+                                    Panel="{StaticResource DataGridFieldGroupPanel}"/>
+                    </DataGrid.GroupStyle>
+                
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Rev"   Width=".2*" Binding="{Binding RevisionNumber}"/>
+                        <DataGridTextColumn Header="Revised By" Width="*" Binding="{Binding RevisedBy}"/>
+                        <DataGridTextColumn Header="Revision Date" Width="*" Binding="{Binding RevisionDate}"/>
+                        <DataGridTextColumn Header="New Value" Width="*" Binding="{Binding NewValue}"/>
+                        <DataGridTextColumn Header="Old Value" Width="*" Binding="{Binding OldValue}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </GroupBox>
     </Grid>
 </UserControl>
