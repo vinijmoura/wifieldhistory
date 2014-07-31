@@ -4,16 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:rules="clr-namespace:Lambda3.WorkItemFieldHistory.ViewModels.ValidationRules"
+             xmlns:converters="clr-namespace:Lambda3.WorkItemFieldHistory.Views.Converters"
+             xmlns:controls="clr-namespace:Lambda3.WorkItemFieldHistory.Views.Controls"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/FieldsChangesDataGrid.xaml"/>
-            </ResourceDictionary.MergedDictionaries> 
+            </ResourceDictionary.MergedDictionaries>
+            <converters:NotNullToBooleanConverter x:Key="notNullToBool"/>
         </ResourceDictionary>
-    </UserControl.Resources> 
-    
+    </UserControl.Resources>
+
     <Grid Margin="5,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -67,7 +70,10 @@
             </Button.Style>
         </Button>
 
-        <GroupBox Grid.Row="1" Grid.ColumnSpan="4" Margin="10">
+        <GroupBox IsEnabled="{Binding RevisionHistory, Converter={StaticResource notNullToBool}}"
+                  Grid.ColumnSpan="4"
+                  Grid.Row="1"
+                  Margin="10">
             <GroupBox.Header>
                 <TextBlock>
                     <TextBlock.Text>
@@ -79,6 +85,34 @@
                 </TextBlock>
             </GroupBox.Header>
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Field Names" Margin="10" VerticalAlignment="Center"/>
+                <ComboBox SelectedItem="{Binding SelectedField}"
+                          controls:Fallback.FallbackItemIndex="0"
+                          DisplayMemberPath="Name"
+                          SelectedIndex="0"
+                          Grid.Column="1"
+                          Margin="5,10"
+                          TabIndex="6">
+                    <ComboBox.Resources>
+                        <CollectionViewSource x:Key="FieldsSource" Source="{Binding Path=RevisionHistory.Fields}" />
+                    </ComboBox.Resources>
+                    <ComboBox.ItemsSource>
+                        <CompositeCollection>
+                            <controls:NamedItem Name="(All Fields)"/>
+                            <CollectionContainer Collection="{Binding Source={StaticResource FieldsSource}}" />
+                        </CompositeCollection>
+                    </ComboBox.ItemsSource>
+                </ComboBox>
+
                 <DataGrid ItemsSource="{Binding FieldChangesHistory}"
                           AutoGenerateColumns="False"
                           Grid.ColumnSpan="2"
@@ -90,7 +124,12 @@
                         <GroupStyle ContainerStyle="{StaticResource DataGridFieldGroup}" 
                                     Panel="{StaticResource DataGridFieldGroupPanel}"/>
                     </DataGrid.GroupStyle>
-                
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="Background" Value="White" />
+                        </Style>
+                    </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Rev"   Width=".2*" Binding="{Binding RevisionNumber}"/>
                         <DataGridTextColumn Header="Revised By" Width="*" Binding="{Binding RevisedBy}"/>

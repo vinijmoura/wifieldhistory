@@ -13,6 +13,8 @@ using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using System.Windows.Input;
 using TShooter.TeamFoundation.Dialogs;
+using System.Collections;
+using System.Linq.Expressions;
 
 namespace Lambda3.WorkItemFieldHistory.ViewModels
 {
@@ -22,7 +24,8 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
 
         private int workItemId;
         private RevisionHistory revisionHistory;
-        private ICollectionView fieldChangesHistory;
+        private IEnumerable fieldChangesHistory;
+        private object selectedField;
 
 
         public int WorkItemId
@@ -37,10 +40,16 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             set { revisionHistory = value; OnPropertyChanged(); }
         }
 
-        public ICollectionView FieldChangesHistory
+        public IEnumerable FieldChangesHistory
         {
             get { return fieldChangesHistory; }
             set { fieldChangesHistory = value; OnPropertyChanged(); }
+        }
+
+        public object SelectedField
+        {
+            get { return selectedField; }
+            set { selectedField = value; OnPropertyChanged(); ChangeField(); }
         }
 
 
@@ -51,12 +60,25 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
 
         public FieldHistoryViewModel(TfsClientRepository tfsRepository)
         {
+            PickWorkItemCommand = new RelayCommand(PickWorkItem);
             ViewFieldsCommand = new RelayCommand((p) => ViewFieldsOfWorkItem(),
                                                  (p) => WorkItemId > 0);
 
-            PickWorkItemCommand = new RelayCommand((p) => PickWorkItem());
+            clientRepository = tfsRepository;
+        }
 
-            this.clientRepository = tfsRepository;
+        private void ChangeField()
+        {
+            if (RevisionHistory == null)
+                return;
+
+            if (SelectedField is Field)
+            {
+                FieldChangesHistory = RevisionHistory.GetFieldHistory(SelectedField as Field).ToList();
+                return;
+            }
+
+            FieldChangesHistory = GroupAllFieldsBy(field => field.FieldName);
         }
 
         private void ViewFieldsOfWorkItem()
@@ -64,12 +86,11 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             try
             {
                 RevisionHistory = new RevisionHistory(clientRepository.GetWorkItem(WorkItemId));
-                FieldChangesHistory = new ListCollectionView(RevisionHistory.GetAllFieldHistory().ToList());
-                FieldChangesHistory.GroupDescriptions.Add(new PropertyGroupDescription("FieldName"));
+                SelectedField = null;
             }
             catch (Exception error)
             {
-                error.Show("Work Item Field History");
+                error.Show();
             }
         }
 
@@ -84,15 +105,16 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
                 })
                 {
                     var windowWrapper = new Win32WindowWrapper(new IntPtr(WorkItemFieldHistoryPackage.DTE.Application.MainWindow.HWnd));
-                    if (dlg.ShowDialog(windowWrapper) != DialogResult.OK) return;
+                    if (dlg.ShowDialog(windowWrapper) != DialogResult.OK)
+                        return;
 
-                    WorkItemId = dlg.SelectedWorkItems[0].Id;
+                    WorkItemId = dlg.SelectedWorkItems.First().Id;
                     ViewFieldsOfWorkItem();
                 }
             }
             catch (Exception ex)
             {
-                ex.Show("Work Item Field History");
+                ex.Show();
             }
         }
 
@@ -103,6 +125,16 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private ListCollectionView GroupAllFieldsBy(Expression<Func<FieldAtRevision, object>> key)
+        {
+            var propertyName = (key.Body as MemberExpression).Member.Name;
+
+            var allFields = new ListCollectionView(RevisionHistory.GetAllFieldHistory().ToList());
+            allFields.GroupDescriptions.Add(new PropertyGroupDescription(propertyName));
+
+            return allFields;
         }
     }
 }

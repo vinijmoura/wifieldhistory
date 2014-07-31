@@ -5,7 +5,7 @@ namespace Lambda3.WorkItemFieldHistory.Extensions
 {
     static class ExceptionExtensions
     {
-        public static void Show(this Exception exception, string title)
+        public static void Show(this Exception exception, string title = "Work Item Field History")
         {
             MessageBox.Show(exception.Message,
                             title,
