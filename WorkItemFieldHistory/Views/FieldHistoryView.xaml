@@ -53,6 +53,7 @@
 
         <Button Content="Show Revision(s)"
                 Command="{Binding ViewFieldsCommand}"
+                IsDefault="{Binding ElementName=WorkItemId, Path=IsKeyboardFocused}"
                 HorizontalAlignment="Left"
                 Grid.Column="3"
                 Margin="10,0,0,0"  
