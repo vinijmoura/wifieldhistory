@@ -24,7 +24,7 @@ namespace Lambda3.WorkItemFieldHistory.Views.Controls
         public static readonly DependencyProperty FallbackItemIndexProperty =
             DependencyProperty.RegisterAttached("FallbackItemIndex",
                 typeof(int),
-                typeof(ComboBox),
+                typeof(Fallback),
                 new PropertyMetadata(-1,
                                      new PropertyChangedCallback(FallbackItemIndex_PropertyChangedCallback)));
 

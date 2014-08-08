@@ -15,6 +15,7 @@ using System.Windows.Input;
 using TShooter.TeamFoundation.Dialogs;
 using System.Collections;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Lambda3.WorkItemFieldHistory.ViewModels
 {
@@ -23,6 +24,7 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
         private readonly TfsClientRepository clientRepository;
 
         private int workItemId;
+        private bool isBusy;
         private RevisionHistory revisionHistory;
         private IEnumerable fieldChangesHistory;
         private object selectedField;
@@ -32,6 +34,12 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
         {
             get { return workItemId; }
             set { workItemId = value; OnPropertyChanged(); }
+        }
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; OnPropertyChanged(); }
         }
 
         public RevisionHistory RevisionHistory
@@ -60,9 +68,10 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
 
         public FieldHistoryViewModel(TfsClientRepository tfsRepository)
         {
-            PickWorkItemCommand = new RelayCommand(PickWorkItem);
-            ViewFieldsCommand = new RelayCommand((p) => ViewFieldsOfWorkItem(),
-                                                 (p) => WorkItemId > 0);
+            PickWorkItemCommand = new RelayCommand(p => PickWorkItem(),
+                                                   p => !IsBusy);
+            ViewFieldsCommand = new RelayCommand(async p => await ViewFieldsOfWorkItem(),
+                                                 p => WorkItemId > 0 && !IsBusy);
 
             clientRepository = tfsRepository;
         }
@@ -81,17 +90,21 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             FieldChangesHistory = GroupAllFieldsBy(field => field.FieldName);
         }
 
-        private void ViewFieldsOfWorkItem()
+        private async Task ViewFieldsOfWorkItem()
         {
+            IsBusy = true;
+
             try
             {
-                RevisionHistory = new RevisionHistory(clientRepository.GetWorkItem(WorkItemId));
+                RevisionHistory = new RevisionHistory(await clientRepository.GetWorkItem(WorkItemId));
                 SelectedField = null;
             }
             catch (Exception error)
             {
                 error.Show();
             }
+
+            IsBusy = false;
         }
 
         private void PickWorkItem()

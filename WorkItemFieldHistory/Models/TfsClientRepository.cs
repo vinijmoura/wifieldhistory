@@ -2,6 +2,7 @@
 using Microsoft.TeamFoundation.Framework.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
+using System.Threading.Tasks;
 
 namespace Lambda3.WorkItemFieldHistory.Models
 {
@@ -23,9 +24,9 @@ namespace Lambda3.WorkItemFieldHistory.Models
             get { return this.collection.AuthorizedIdentity; }
         }
 
-        public WorkItem GetWorkItem(int id)
+        public Task<WorkItem> GetWorkItem(int id)
         {
-            return workItemStore.GetWorkItem(id);
+            return Task.Run(() => workItemStore.GetWorkItem(id));
         }
 
         public WorkItemStore WorkItemStore
