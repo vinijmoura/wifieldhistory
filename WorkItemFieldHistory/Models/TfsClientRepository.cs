@@ -1,22 +1,23 @@
-﻿using Microsoft.TeamFoundation.Client;
+﻿using Lambda3.WorkItemFieldHistory.Extensions;
+using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.Framework.Client;
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Threading.Tasks;
+using TFS = Microsoft.TeamFoundation.WorkItemTracking.Client;
 
 namespace Lambda3.WorkItemFieldHistory.Models
 {
     public class TfsClientRepository : IDisposable
     {
         private readonly TfsTeamProjectCollection collection;
+        private readonly TFS.WorkItemStore workItemStore;
         private readonly string selectedProject;
-        private readonly WorkItemStore workItemStore;
 
         public TfsClientRepository(TfsTeamProjectCollection collection, string selectedProject)
         {
             this.collection = collection;
             this.selectedProject = selectedProject;
-            this.workItemStore = collection.GetService<WorkItemStore>();
+            workItemStore = collection.GetService<TFS.WorkItemStore>();
         }
 
         public TeamFoundationIdentity AuthenticatedIdentity
@@ -24,12 +25,12 @@ namespace Lambda3.WorkItemFieldHistory.Models
             get { return this.collection.AuthorizedIdentity; }
         }
 
-        public Task<WorkItem> GetWorkItem(int id)
+        public async Task<WorkItem> GetWorkItem(int id)
         {
-            return Task.Run(() => workItemStore.GetWorkItem(id));
+            return await Task.Run(() => workItemStore.GetWorkItem(id).MapToModel());
         }
 
-        public WorkItemStore WorkItemStore
+        public TFS.WorkItemStore WorkItemStore
         {
             get { return workItemStore; }
         }
@@ -41,14 +42,14 @@ namespace Lambda3.WorkItemFieldHistory.Models
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!!disposing && this.collection != null)
-                this.collection.Dispose();
+            if (!disposing && collection != null)
+                collection.Dispose();
         }
     }
 }

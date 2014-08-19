@@ -93,7 +93,7 @@
                 <TextBlock>
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} - {1}">
-                            <Binding Path="RevisionHistory.WorkItem.Type.Name"/>
+                            <Binding Path="RevisionHistory.WorkItem.TypeName"/>
                             <Binding Path="RevisionHistory.WorkItem.Title"/>
                         </MultiBinding>
                     </TextBlock.Text>

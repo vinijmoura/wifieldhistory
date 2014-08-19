@@ -5,7 +5,6 @@ using Lambda3.WorkItemFieldHistory.Models;
 using Lambda3.WorkItemFieldHistory.Package;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.MVVM;
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -68,7 +67,7 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
 
         public FieldHistoryViewModel(TfsClientRepository tfsRepository)
         {
-            PickWorkItemCommand = new RelayCommand(p => PickWorkItem(),
+            PickWorkItemCommand = new RelayCommand(async p => await PickWorkItem(),
                                                    p => !IsBusy);
             ViewFieldsCommand = new RelayCommand(async p => await ViewFieldsOfWorkItem(),
                                                  p => WorkItemId > 0 && !IsBusy);
@@ -107,7 +106,7 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             IsBusy = false;
         }
 
-        private void PickWorkItem()
+        private async Task PickWorkItem()
         {
             try
             {
@@ -122,7 +121,7 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
                         return;
 
                     WorkItemId = dlg.SelectedWorkItems.First().Id;
-                    ViewFieldsOfWorkItem();
+                    await ViewFieldsOfWorkItem();
                 }
             }
             catch (Exception ex)

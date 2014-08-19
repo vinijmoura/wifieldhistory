@@ -142,8 +142,11 @@
   <ItemGroup>
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\PackageExtensions.cs" />
-    <Compile Include="Extensions\RevisionExtensions.cs" />
+    <Compile Include="Models\Field.cs" />
+    <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\RevisionHistory.cs" />
+    <Compile Include="Extensions\MapperExtensions.cs" />
+    <Compile Include="Models\WorkItem.cs" />
     <Compile Include="Package\Guids.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
