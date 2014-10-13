@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="638db2c8-c18c-4a34-90dc-abcc57407b78" Version="1.2" Language="en-US" Publisher="Lambda3" />
+    <Identity Id="638db2c8-c18c-4a34-90dc-abcc57407b78" Version="1.3" Language="en-US" Publisher="Lambda3" />
     <DisplayName>Work Item Field History VS2013</DisplayName>
     <Description>This package audits a specific field of a work item, showing only the revisions in which its value has changed.</Description>
     <MoreInfo>http://visualstudiogallery.msdn.microsoft.com/68f29da6-36ef-4084-9973-1fbf6116db48</MoreInfo>
