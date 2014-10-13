@@ -40,6 +40,7 @@ namespace Lambda3.WorkItemFieldHistory.Extensions
                 {
                     Name = field.Name,
                     Value = field.Value,
+                    Type = field.FieldDefinition.FieldType,
                     OriginalValue = field.OriginalValue,
                     IsChangedInRevision = field.IsChangedInRevision
                 });

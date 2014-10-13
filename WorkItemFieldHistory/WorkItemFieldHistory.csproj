@@ -160,6 +160,7 @@
     <Compile Include="Views\Controls\FallbackItem.cs" />
     <Compile Include="Views\Controls\MetroProgressBar.cs" />
     <Compile Include="Views\Controls\NamedItem.cs" />
+    <Compile Include="Views\Controls\PageSource.cs" />
     <Compile Include="Views\Converters\NotNullToBooleanConverter.cs" />
     <Compile Include="Views\FieldHistoryView.xaml.cs">
       <DependentUpon>FieldHistoryView.xaml</DependentUpon>

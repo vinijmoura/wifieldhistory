@@ -129,6 +129,7 @@
                 </ComboBox>
 
                 <DataGrid ItemsSource="{Binding FieldChangesHistory}"
+                          RowDetailsTemplate="{StaticResource HtmlRowDetailsTemplate}"
                           AutoGenerateColumns="False"
                           Grid.ColumnSpan="2"
                           IsReadOnly="True"
@@ -139,12 +140,14 @@
                         <GroupStyle ContainerStyle="{StaticResource DataGridFieldGroup}" 
                                     Panel="{StaticResource DataGridFieldGroupPanel}"/>
                     </DataGrid.GroupStyle>
+                    
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
                             <Setter Property="Foreground" Value="Black" />
                             <Setter Property="Background" Value="White" />
                         </Style>
                     </DataGrid.RowStyle>
+            
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Rev"   Width=".2*" Binding="{Binding RevisionNumber}"/>
                         <DataGridTextColumn Header="Revised By" Width="*" Binding="{Binding RevisedBy}"/>

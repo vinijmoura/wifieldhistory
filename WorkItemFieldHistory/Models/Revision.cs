@@ -16,7 +16,8 @@ namespace Lambda3.WorkItemFieldHistory.Models
                 RevisionDate = GetFieldValue("Changed Date"),
                 NewValue = GetFieldValue(fieldName),
                 OldValue = GetFieldOriginalValue(fieldName),
-                FieldName = fieldName
+                FieldName = fieldName,
+                FieldType = Fields[fieldName].Type 
             };
         }
 

@@ -1,4 +1,6 @@
-﻿namespace Lambda3.WorkItemFieldHistory.Models
+﻿using Microsoft.TeamFoundation.WorkItemTracking.Client;
+
+namespace Lambda3.WorkItemFieldHistory.Models
 {
     public class FieldAtRevision
     {
@@ -12,6 +14,8 @@
 
         public string OldValue { get; set; }
 
-        public string FieldName { get; set;}
+        public string FieldName { get; set; }
+
+        public FieldType FieldType { get; set; }
     }
 }
