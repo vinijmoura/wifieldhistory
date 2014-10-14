@@ -16,6 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:NotNullToBooleanConverter x:Key="notNullToBool"/>
             <BooleanToVisibilityConverter x:Key="boolToVisibility"/>
+            <converters:HtmlConverter x:Key="convertHtml"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -152,8 +153,8 @@
                         <DataGridTextColumn Header="Rev"   Width=".2*" Binding="{Binding RevisionNumber}"/>
                         <DataGridTextColumn Header="Revised By" Width="*" Binding="{Binding RevisedBy}"/>
                         <DataGridTextColumn Header="Revision Date" Width="*" Binding="{Binding RevisionDate}"/>
-                        <DataGridTextColumn Header="New Value" Width="*" Binding="{Binding NewValue}"/>
-                        <DataGridTextColumn Header="Old Value" Width="*" Binding="{Binding OldValue}"/>
+                        <DataGridTextColumn Header="New Value" Width="*" Binding="{Binding NewValue, Converter={StaticResource convertHtml}}"/>
+                        <DataGridTextColumn Header="Old Value" Width="*" Binding="{Binding OldValue, Converter={StaticResource convertHtml}}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
