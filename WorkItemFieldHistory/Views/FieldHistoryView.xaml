@@ -132,6 +132,7 @@
                 <DataGrid ItemsSource="{Binding FieldChangesHistory}"
                           RowDetailsTemplate="{StaticResource HtmlRowDetailsTemplate}"
                           AutoGenerateColumns="False"
+                          SelectionMode="Single" 
                           Grid.ColumnSpan="2"
                           IsReadOnly="True"
                           Focusable="False"
