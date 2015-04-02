@@ -39,6 +39,7 @@ namespace Lambda3.WorkItemFieldHistory.Extensions
                 .Select(field => new Field
                 {
                     Name = field.Name,
+                    ReferenceName = field.FieldDefinition.ReferenceName,
                     Value = field.Value,
                     Type = field.FieldDefinition.FieldType,
                     OriginalValue = field.OriginalValue,

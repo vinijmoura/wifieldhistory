@@ -17,7 +17,8 @@ namespace Lambda3.WorkItemFieldHistory.Models
                 NewValue = GetFieldValue(fieldName),
                 OldValue = GetFieldOriginalValue(fieldName),
                 FieldName = fieldName,
-                FieldType = Fields[fieldName].Type 
+                ReferenceName = Fields[fieldName].ReferenceName,
+                FieldType = Fields[fieldName].Type
             };
         }
 

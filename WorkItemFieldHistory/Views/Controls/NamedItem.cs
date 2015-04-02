@@ -8,6 +8,7 @@ namespace Lambda3.WorkItemFieldHistory.Views.Controls
 {
     class NamedItem
     {
-        public string Name { get; set; }
+        public string CompleteName { get; set; }
+
     }
 }

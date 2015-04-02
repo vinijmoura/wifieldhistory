@@ -16,6 +16,16 @@ namespace Lambda3.WorkItemFieldHistory.Models
 
         public string FieldName { get; set; }
 
+        public string ReferenceName { get; set; }
+
         public FieldType FieldType { get; set; }
+
+        public string CompleteName
+        {
+            get
+            {
+                return string.Format("{0} ({1})", FieldName, ReferenceName);
+            }
+        }
     }
 }

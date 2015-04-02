@@ -113,7 +113,7 @@
                 <TextBlock Text="Field Names" Margin="10" VerticalAlignment="Center"/>
                 <ComboBox SelectedItem="{Binding SelectedField}"
                           controls:Fallback.FallbackItemIndex="0"
-                          DisplayMemberPath="Name"
+                          DisplayMemberPath="CompleteName"
                           SelectedIndex="0"
                           Grid.Column="1"
                           Margin="5,10"
@@ -123,7 +123,7 @@
                     </ComboBox.Resources>
                     <ComboBox.ItemsSource>
                         <CompositeCollection>
-                            <controls:NamedItem Name="(All Fields)"/>
+                            <controls:NamedItem CompleteName="(All Fields)"/>
                             <CollectionContainer Collection="{Binding Source={StaticResource FieldsSource}}" />
                         </CompositeCollection>
                     </ComboBox.ItemsSource>
@@ -151,7 +151,7 @@
                     </DataGrid.RowStyle>
             
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Rev"   Width=".2*" Binding="{Binding RevisionNumber}"/>
+                        <DataGridTextColumn Header="Rev" Width=".2*" Binding="{Binding RevisionNumber}"/>
                         <DataGridTextColumn Header="Revised By" Width="*" Binding="{Binding RevisedBy}"/>
                         <DataGridTextColumn Header="Revision Date" Width="*" Binding="{Binding RevisionDate}"/>
                         <DataGridTextColumn Header="New Value" Width="*" Binding="{Binding NewValue, Converter={StaticResource convertHtml}}"/>

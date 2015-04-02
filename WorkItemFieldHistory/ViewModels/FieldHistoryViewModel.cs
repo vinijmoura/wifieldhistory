@@ -56,7 +56,8 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
         public object SelectedField
         {
             get { return selectedField; }
-            set { selectedField = value; OnPropertyChanged(); ChangeField(); }
+            set { selectedField = value; OnPropertyChanged(); ChangeField(); 
+            }
         }
 
 
@@ -86,7 +87,7 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
                 return;
             }
 
-            FieldChangesHistory = GroupAllFieldsBy(field => field.FieldName);
+            FieldChangesHistory = GroupAllFieldsBy(field => field.CompleteName);
         }
 
         private async Task ViewFieldsOfWorkItem()
