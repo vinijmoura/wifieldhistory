@@ -1,20 +1,22 @@
-﻿using System.Windows;
-using System.Windows.Forms;
+﻿using EnvDTE;
 using Lambda3.WorkItemFieldHistory.Extensions;
 using Lambda3.WorkItemFieldHistory.Models;
 using Lambda3.WorkItemFieldHistory.Package;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.MVVM;
+using Microsoft.VisualStudio.TeamFoundation.WorkItemTracking;
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using TShooter.TeamFoundation.Dialogs;
-using System.Collections;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+using VS = Microsoft.VisualStudio.Shell;
 
 namespace Lambda3.WorkItemFieldHistory.ViewModels
 {
@@ -27,6 +29,7 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
         private RevisionHistory revisionHistory;
         private IEnumerable fieldChangesHistory;
         private object selectedField;
+        private const string DOCUMENTSERVICE_CLASS = "Microsoft.VisualStudio.TeamFoundation.WorkItemTracking.DocumentService";
 
 
         public int WorkItemId
@@ -65,6 +68,7 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
 
         public ICommand PickWorkItemCommand { get; private set; }
 
+        public ICommand GoToWorkItemCommand { get; private set; }
 
         public FieldHistoryViewModel(TfsClientRepository tfsRepository)
         {
@@ -73,6 +77,8 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             ViewFieldsCommand = new RelayCommand(async p => await ViewFieldsOfWorkItem(),
                                                  p => WorkItemId > 0 && !IsBusy);
 
+            GoToWorkItemCommand = new RelayCommand(async p => GoToWorkItem(),
+                                                 p => WorkItemId > 0 && !isBusy);
             clientRepository = tfsRepository;
         }
 
@@ -131,7 +137,25 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             }
         }
 
+        private void GoToWorkItem()
+        {
+            IsBusy = true;
 
+            var dte2 = VS.Package.GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
+            var witDocumentService = (DocumentService)dte2.DTE.GetObject(DOCUMENTSERVICE_CLASS);
+
+            var widoc = witDocumentService.GetWorkItem(clientRepository.Collection, WorkItemId, this);
+            try
+            {
+                witDocumentService.ShowWorkItem(widoc);
+            }
+            finally
+            {
+                widoc.Release(this);
+            }
+
+            IsBusy = false;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

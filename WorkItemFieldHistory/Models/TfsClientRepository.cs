@@ -40,6 +40,10 @@ namespace Lambda3.WorkItemFieldHistory.Models
             get { return selectedProject; }
         }
 
+        public TfsTeamProjectCollection Collection
+        {
+            get { return collection;}
+        }
         public void Dispose()
         {
             Dispose(true);

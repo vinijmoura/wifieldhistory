@@ -26,6 +26,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -54,7 +55,8 @@
                 Command="{Binding PickWorkItemCommand}" 
                 Grid.Column="2"
                 Margin="5,0"
-                Width="40"/>
+                Width="40"
+                ToolTip="Go to Work Item Query Picker"/>
 
         <Button Content="Show Revision(s)"
                 Command="{Binding ViewFieldsCommand}"
@@ -63,7 +65,8 @@
                 Grid.Column="3"
                 Margin="10,0,0,0"  
                 TabIndex="3"
-                Width="105" >
+                Width="105" 
+                ToolTip="Show Revision(s)">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="False" />
@@ -76,7 +79,26 @@
             </Button.Style>
         </Button>
 
-        <Grid Grid.ColumnSpan="4"
+        <Button Command="{Binding GoToWorkItemCommand}" 
+                Grid.Column="4"
+                Margin="20,0"
+                Width="30"
+                HorizontalAlignment="Right"
+                ToolTip="Go to Work Item">
+            <Image Source="/WorkItemFieldHistory;component/GoToWorkItem.png" Stretch="UniformToFill" Margin="2"/>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="IsEnabled" Value="False" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=WorkItemId, Path=(Validation.HasError)}" Value="False">
+                            <Setter Property="IsEnabled" Value="True" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <Grid Grid.ColumnSpan="5"
               Grid.Row="1"
               Height="5"
               Margin="2">
@@ -84,10 +106,10 @@
                                        HorizontalAlignment="Stretch"
                                        IsIndeterminate="True"/>
         </Grid>
-        
+
 
         <GroupBox IsEnabled="{Binding RevisionHistory, Converter={StaticResource notNullToBool}}"
-                  Grid.ColumnSpan="4"
+                  Grid.ColumnSpan="5"
                   Grid.Row="2"
                   Margin="10, 0, 10, 10">
             <GroupBox.Header>
@@ -142,14 +164,14 @@
                         <GroupStyle ContainerStyle="{StaticResource DataGridFieldGroup}" 
                                     Panel="{StaticResource DataGridFieldGroupPanel}"/>
                     </DataGrid.GroupStyle>
-                    
+
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
                             <Setter Property="Foreground" Value="Black" />
                             <Setter Property="Background" Value="White" />
                         </Style>
                     </DataGrid.RowStyle>
-            
+
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Rev" Width=".2*" Binding="{Binding RevisionNumber}"/>
                         <DataGridTextColumn Header="Revised By" Width="*" Binding="{Binding RevisedBy}"/>
