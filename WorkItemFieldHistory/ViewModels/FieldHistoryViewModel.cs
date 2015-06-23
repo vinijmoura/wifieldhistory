@@ -70,6 +70,8 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
 
         public ICommand GoToWorkItemCommand { get; private set; }
 
+        public ICommand ReportWorkItemCommand { get; private set; }
+
         public FieldHistoryViewModel(TfsClientRepository tfsRepository)
         {
             PickWorkItemCommand = new RelayCommand(async p => await PickWorkItem(),
