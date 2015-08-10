@@ -5,8 +5,7 @@ using Microsoft.TeamFoundation.Controls;
 using VS = Microsoft.VisualStudio.Shell;
 using System;
 using System.ComponentModel;
-using System.Windows.Forms;
-using Microsoft.TeamFoundation.MVVM;
+
 
 namespace Lambda3.WorkItemFieldHistory.Views
 {
@@ -34,9 +33,13 @@ namespace Lambda3.WorkItemFieldHistory.Views
         {
             try
             {
-                var dte2 = VS.Package.GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
+                EnvDTE80.DTE2 dte2 = VS.Package.GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
+                
+
                 if (dte2 != null)
-                    dte2.ExecuteCommand("Tools.WorkItemFieldHistory2015");
+                {
+                    dte2.ExecuteCommand("Tools.WorkItemFieldHistory");
+                }
             }
             catch (Exception error)
             {
@@ -46,10 +49,12 @@ namespace Lambda3.WorkItemFieldHistory.Views
 
         public void Invalidate()
         {
+
         }
 
         public void Dispose()
         {
+
         }
     }
 }

@@ -1,0 +1,7 @@
+<WebAccess version="11.0">
+  <plugin name="Work Item Field History" vendor="Lambda3" moreinfo="http://www.lambda3.com.br" version="0.9.0" >
+    <modules>
+      <module namespace="L3.WorkItemHistory" loadAfter="TFS.WorkItemTracking.Controls"/>
+    </modules>
+  </plugin>
+</WebAccess>

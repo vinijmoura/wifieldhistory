@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Seta a variável com o diretório local para não procurar as DLLs no %ProgramFiles%  -->
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <JsSource Include="**\*.js" Exclude="**\*.min.js;Scripts\*.js;Output\*.js" />
+  </ItemGroup>
+  
+  <Import Project="..\packages\AjaxMin.5.10.5260.16959\tools\net40\AjaxMin.targets" />
+  <Import Project="..\packages\MSBuildTasks.1.4.0.74\tools\MSBuild.Community.Tasks.targets"/>
+
+  <Target Name="AfterBuild">
+    <AjaxMin JsSourceFiles="@(JsSource)" JsSourceExtensionPattern="\.js$" JsTargetExtension=".min.js" />
+    
+    <CallTarget Targets="SendFilesToOutputFolder"/>
+    <CallTarget Targets="CreateZip"/>
+  </Target>
+
+
+  <Target Name="CreateZip">
+    <ItemGroup>
+      <PackageFiles Include="Output\*.js;Output\*.map;Output\*.xml" />
+    </ItemGroup>
+    <Zip Files="@(PackageFiles)" ZipFileName="Output\$(ProjectName).zip" Flatten="True" />
+  </Target>
+
+  <Target Name="SendFilesToOutputFolder">
+    <ItemGroup>
+      <FilesToCopy Include="*.map;manifest.xml" />
+      <FilesToMove Include="*.min.js" />
+    </ItemGroup>
+    <Copy SourceFiles="@(JsSource)"
+          DestinationFiles="@(JsSource->'Output\%(RecursiveDir)%(Filename).debug%(Extension)')" />
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="Output" />
+    <Move SourceFiles="@(FilesToMove)" DestinationFolder="Output" />
+  </Target>
+
+</Project>

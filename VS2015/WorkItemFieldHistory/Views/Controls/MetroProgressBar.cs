@@ -154,7 +154,7 @@ namespace Lambda3.WorkItemFieldHistory.Views.Controls
                 }
                 catch (Exception)
                 {
-                    //we just ignore 
+                    throw new NotSupportedException();
                 }
             }
         }
@@ -207,7 +207,7 @@ namespace Lambda3.WorkItemFieldHistory.Views.Controls
             EllipseOffset = 9;
         }
 
-        private double CalcContainerAnimStart(double width)
+        private static double CalcContainerAnimStart(double width)
         {
             if (width <= 180)
                 return -34;
@@ -217,7 +217,7 @@ namespace Lambda3.WorkItemFieldHistory.Views.Controls
             return -63;
         }
 
-        private double CalcContainerAnimEnd(double width)
+        private static double CalcContainerAnimEnd(double width)
         {
             double firstPart = 0.4352 * width;
             if (width <= 180)
@@ -228,12 +228,12 @@ namespace Lambda3.WorkItemFieldHistory.Views.Controls
             return firstPart + 58.862;
         }
 
-        private double CalcEllipseAnimWell(double width)
+        private static double CalcEllipseAnimWell(double width)
         {
             return width * 1.0 / 3.0;
         }
 
-        private double CalcEllipseAnimEnd(double width)
+        private static double CalcEllipseAnimEnd(double width)
         {
             return width * 2.0 / 3.0;
         }

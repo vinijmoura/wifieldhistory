@@ -62,7 +62,7 @@ namespace Lambda3.WorkItemFieldHistory.Package
             }
         }
 
-        private TeamFoundationServerExt GetExtension()
+        private static TeamFoundationServerExt GetExtension()
         {
             DTE = (DTE) GetGlobalService(typeof(DTE));
             return DTE.GetObject(EXTENSION_CLASS) as TeamFoundationServerExt;

@@ -70,8 +70,6 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
 
         public ICommand GoToWorkItemCommand { get; private set; }
 
-        public ICommand ReportWorkItemCommand { get; private set; }
-
         public FieldHistoryViewModel(TfsClientRepository tfsRepository)
         {
             PickWorkItemCommand = new RelayCommand(async p => await PickWorkItem(),
@@ -79,7 +77,7 @@ namespace Lambda3.WorkItemFieldHistory.ViewModels
             ViewFieldsCommand = new RelayCommand(async p => await ViewFieldsOfWorkItem(),
                                                  p => WorkItemId > 0 && !IsBusy);
 
-            GoToWorkItemCommand = new RelayCommand(async p => GoToWorkItem(),
+            GoToWorkItemCommand = new RelayCommand(p => GoToWorkItem(),
                                                  p => WorkItemId > 0 && !isBusy);
             clientRepository = tfsRepository;
         }
