@@ -5,6 +5,7 @@ using Microsoft.TeamFoundation.Controls;
 using VS = Microsoft.VisualStudio.Shell;
 using System;
 using System.ComponentModel;
+using 
 
 
 namespace Lambda3.WorkItemFieldHistory.Views
@@ -33,12 +34,12 @@ namespace Lambda3.WorkItemFieldHistory.Views
         {
             try
             {
-                EnvDTE80.DTE2 dte2 = VS.Package.GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
+                EnvDTE.DTE dte = VS.Package.GetGlobalService(typeof(DTE)) as EnvDTE.DTE;
                 
 
-                if (dte2 != null)
+                if (dte != null)
                 {
-                    dte2.ExecuteCommand("Tools.WorkItemFieldHistory");
+                    dte.ExecuteCommand("Tools.WorkItemFieldHistory");
                 }
             }
             catch (Exception error)
